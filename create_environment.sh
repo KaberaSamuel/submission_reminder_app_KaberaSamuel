@@ -1,6 +1,10 @@
 #!/bin/bash
 
 # file content variables
+startup_script='#!/bin/bash
+
+bash app/reminder.sh'
+
 reminder_script='#!/bin/bash
 
 # Source environment variables and helper functions
@@ -59,14 +63,15 @@ dir="submission_reminder_$name"
 mkdir $dir && cd $dir
 
 # creating starting files
-mkdir app && touch app/reminder.sh
-mkdir modules && touch modules/functions.sh
-mkdir assets && touch assets/submissions.txt
-mkdir config && touch config/config.env 
-touch startup.sh
+mkdir app && touch app/reminder.sh && chmod +x app/reminder.sh
+mkdir modules && touch modules/functions.sh && chmod +x modules/functions.sh
+touch startup.sh && && chmod +x startup.sh
+mkdir assets && touch assets/submissions.txt 
+mkdir config && touch config/config.env `
 
 # populating files
 echo "$reminder_script" > app/reminder.sh
 echo "$functions_script" > modules/functions.sh
+echo "$startup_script" > startup.sh
 echo "$submissions_content" > assets/submissions.txt
 echo "$env_content" > config/config.env

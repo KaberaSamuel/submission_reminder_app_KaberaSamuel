@@ -22,3 +22,5 @@ read -p "Enter new assignment name: " assignment
 # updating assignment variable 
 sed -i "s/$ASSIGNMENT/$assignment/" $config_file
 
+cd $user_dir && bash startup.sh
+
