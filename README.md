@@ -2,25 +2,39 @@
 
 ## **About**
 
-This is a basic application that alerts students about upcoming assignment deadlines
+A simple app that reminds students about the upcoming assignment deadlines.
 
 ## **Usage**
 
 To use this app, follow these steps:
 
 1. Clone the repository: **`git clone git@github.com:KaberaSamuel/submission_reminder_app_KaberaSamuel.git`**
-2. Create user environment files: **`bash create_environment.sh`**
-3. To change assignment that is being tracked: **`bash copilot_shell_script.sh`**
-4. To see students who haven't submitted assignment (the one being tracked): **`bash archive_logs.sh`**
-   1. Switch to created user directory: **`cd submission_reminder_[username].sh`**
+2. Set up user directory: **`bash create_environment.sh`**
+3. To change assignment being tracked: **`bash copilot_shell_script.sh`**
+4. To check students who haven't submitted:
+   1. Go to the user directory: **`cd submission_reminder_[username]`**
    2. Run the startup script: **`bash startup.sh`**
 
 ## **TroubleShooting (Must Read)**
 
-If you clearly follow steps in Usage section, there shouldn't be any bugs; but in case it happens, here are the tips to help you
+If you follow the usage steps correctly, it should work fine. But if you meet some bugs, check these:
 
-- This app works with relative paths, so make sure you run scripts from the directories, they're located in. Forexample:
-  - Running startup.sh from the app root directory, will throw an error. You have to first switch to the directory where it's located, that is: **`cd submission_reminder_[username]`** and then **`bash startup.sh`**
-  - Running copilot_shell_script.sh or create_environment.sh from created user directory, will also cause errors, they should be run from the root directory of the app
-- Make sure files and directories are created by the create_environment.sh script. if you try to create files by yourself, or change the directory structure, you'll likely get errors
-- Remember to create user files, before running any other script. Forexample: running copilot_shell_script.sh will before running create_environment.sh, will throw an error
+- Scripts must be run from the right location:
+  - Run startup.sh inside the user directory.
+  - Run create_environment.sh and copilot_shell_script.sh from the root of the app.
+- Don't change the directory structure or create files manually.
+- Remember run create_environment.sh before any other script.
+
+## **Extra Tips**
+
+- create_environment.sh sets up all needed folders and files.
+  - File content is stored in variables at the top, then written after file creation.
+  - You can edit:
+    - submissions_content to add more students and assignments
+    - env_content to change the assignment name or deadline
+
+## **Handling Errors (copilot_shell_script.sh)**
+
+- I used 2>/dev/null to hide system error messages.
+- Then I check if the command failed using: **`if [ $? -ne 0 ];`**
+- If there's an error, a custom message is shown and the script exits.
